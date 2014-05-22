@@ -2,27 +2,27 @@ require 'spec_helper'
 
 describe "Static pages" do
 
+  subject { page }
+
   describe "Home page" do
+    before { visit root_path }
 
-    it "should have the content 'Donut Heights'" do
-      visit '/static_pages/home'
-      expect(page).to have_content('Donut Heights')
-    end
-  end
-
-  describe "Contact page" do
-
-    it "should have the content 'Contact'" do
-      visit '/static_pages/contact'
-      expect(page).to have_content('Contact')
-    end
+    it { should have_content('Donut Heights') }
+    it { should have_title(full_title('')) }
+    it { should_not have_title('| Home') }
   end
 
   describe "About page" do
+    before { visit about_path }
 
-    it "should have the content 'About'" do
-      visit '/static_pages/about'
-      expect(page).to have_content('About')
-    end
+    it { should have_content('About') }
+    it { should have_title(full_title('About')) }
+  end
+
+  describe "Contact page" do
+    before { visit contact_path }
+
+    it { should have_content('Contact') }
+    it { should have_title(full_title('Contact')) }
   end
 end
